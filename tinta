@@ -1,0 +1,8 @@
+largura = float(input('Qual a largura da parede? '))
+altura = float(input('Qual a altura da parede? '))
+area = largura*altura
+tinta = float(input('Qual o valor da lata de tinta? '))
+pintura = float(input('Quantos metros uma lata de tinta consegue pintar? '))
+print(f'A area da parede é: {area}')
+print(f'Latas de tintas necessárias {area/pintura}')
+print(f'Preço para pintar a parede: {(area/pintura)*tinta}')
