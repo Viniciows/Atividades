@@ -1,0 +1,8 @@
+from random import randint
+
+adivinhar = int(input('Tente adivinhar qual o número gerado aleatoriamente entre 0 e 5: '))
+
+if adivinhar == randint(0,5):
+    print('Você acertou!')
+else:
+    print('Você errou!')
