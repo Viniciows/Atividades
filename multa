@@ -1,0 +1,6 @@
+velocidade = float(input('Qual a velocidade do carro? '))
+if velocidade <= 80:
+    print('Você não foi multado.')
+else:
+    print('O valor por Km ultrapassado do limite é de 7,00 Reais, sabendo disso:')
+    print(f'Você foi multado. O valor da multa é de {7*(velocidade-80)} Reais, pois ultrapassou {velocidade-80} Km. Débito ou Crédito?')
