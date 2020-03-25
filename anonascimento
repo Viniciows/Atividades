@@ -1,0 +1,19 @@
+#Escreva um programa que leia o ano de nascimento de um jovem e informe, de acordo com sua idade, se ele
+#ainda vai se alistar ao serviço militar, se é a hora de se alistar ou se já passou do tempo do alistamento. Seu
+#programa também deverá mostrar o tempo que falta ou que passou do prazo
+
+ano = int(input('Digite seu ano de nascimento: '))
+if ano == 2002:
+    print('Esse é o ano de se alistar!')
+if ano >= 2003:
+    print('Ainda não chegou sua hora.')
+    idade = 2020-ano
+    print(f'Você tem {idade} anos')
+    defi= 18-idade
+    print(f'Faltam {defi} anos para se alistar.')
+if ano <= 2001:
+    print('O seu tempo de se alistar já passou, passa os documentos boy.')
+    idade = 2020-ano
+    print(f'Você tem {idade} anos')
+    defi = idade-18
+    print(f'Passaram {defi} anos para se alistar.')
