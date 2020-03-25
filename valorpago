@@ -1,0 +1,23 @@
+#Desenvolva um programa que calcule o valor a ser pago por um produto, considerando o seu preço normal e
+#condição de pagamento:
+#À vista dinheiro/cheque: 10% de desconto.
+#À vista no cartão: 5% de desconto.
+#Em até 2x no cartão: preço normal.
+#3x ou mais no cartão: 20% de juros.
+
+valor = float(input('Digite o valor do produto a ser pago: '))
+print('Quando for digitar a forma de pagamento, digite exatamente assim: (dinheiro/cheque; cartão; 2x no cartão; 3x+ no cartão)')
+metodo = input('Digite o método de pagamento: (dinheiro/cheque; cartão; 2x no cartão; 3x+ no cartão) ')
+if metodo == 'dinheiro/cheque':
+    print(f'O valor a ser pago, com 10% de desconto, é: {valor*0.1+valor}.')
+if metodo == 'cartão':
+    print(f'O valor a ser pago, com 5% de desconto, é: {valor*0.05+valor}.')
+if metodo == '2x no cartão':
+    print(f'O valor a ser pago, com preço normal, é: {valor}.')
+if metodo == '3x+ no cartão':
+    print(f'O valor a ser pago, ao todo, com 20% de juros, é {valor*0.2+valor}.')
+    mes = int(input('Em quantas vezes quer dividir? '))
+    if mes <= 2:
+        print(f'Como o número de parcelas é menor que 3, não tem juros, portanto pagará: {valor}.')
+    else:
+        print(f'O valor a ser pago, por mês, com 20% de juros, é {(valor*0.2+valor)/mes}')
