@@ -1,0 +1,7 @@
+tabela = ['Santo André', 'Palmeiras', 'São Paulo', 'Bragantino', 'Mirassol', 'Guarani', 'Novorizontino', 'Santos', 'Inter de Limeira', 'Curintinha']
+times = len(tabela)
+print(f'Número de times: {times} ')
+print(f'5 primeiros times da tabela: {tabela[0:5]}')
+print(f'Os últimos 4 colocados da tabela: {tabela[6:10]}')
+print(sorted(tabela))
+print(f'O menor time de São Paulo (curintia) está na posição: {tabela.index("Curintinha")+1} ')
