@@ -1,0 +1,5 @@
+c = 0
+while c <= 50:
+    c = c + 1
+    if c % 2 == 0:
+        print(c) #só estou mandando printar os pares.
