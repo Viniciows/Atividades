@@ -1,0 +1,5 @@
+número = int(input('Quer ver a tabuada de qual número? '))
+print('-'*30)
+for tabuada in range(1,11):
+    print(f'{número} x {tabuada} = {número*tabuada}')
+print('-'*30)
