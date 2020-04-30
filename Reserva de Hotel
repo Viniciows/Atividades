@@ -1,0 +1,22 @@
+quartos = {}
+continuar = 's'
+while continuar.lower() == 's':
+    pergunta = input('Quer reservar um quarto? [S] - Sim [N] - Lista de reservas\n')
+    if pergunta == 's':
+        value = input('Qual o número do quarto? [0-10]\n')
+        if not value.isnumeric():
+            value = -1
+        else:
+            value = int(value)
+
+        if value < 1 or value > 100:
+            print('Este quarto não existe.')
+        elif quartos.get(value, -1) != -1:
+            print(f'O quarto %i já está reservado.' % (value))
+        else:
+            quartos[value] = {"Hóspede": input("Digite o nome de registro para a reserva: ")}
+            print("Quarto %i reservado para '%s'" % (value, quartos[value]["Hóspede"]))
+    else:
+        print("Reservas:")
+        for i in quartos:
+            print("Quarto Nº %i = %s" % (i, quartos[i]["Hóspede"]))
