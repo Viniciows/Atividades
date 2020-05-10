@@ -1,0 +1,42 @@
+quartos = {}
+opçao = ' '
+while opçao != "s":
+    print('''
+         OPÇÕES DO SISTEMA 
+        [N] = Fazer uma nova reserva
+        [D] = Remover reserva
+        [R] = Exibir Relatório 
+        [S] = Sair do Programa 
+    ''')
+    opçao = input(": ").lower()
+    if opçao == 'n' or opçao == 'd':
+        value = input("Digite o numero do quarto (1 a 10): ")
+        if not value.isnumeric():
+            value = -1
+        else:
+            value = int(value)
+        if value < 1 or value > 10:
+            print("Quarto não encontrado no banco de dados.")
+            continue
+        ocupado = quartos.get(value, -1) != -1
+        if opçao == 'd':
+            if not ocupado:
+                print("Quarto %i não está reservado." % (value))
+            else:
+                del quartos[value]
+                print("A reserva do quarto %i foi removida." % (value))
+        else:
+            if ocupado:
+                print("Quarto %i já está reservado" % (value))
+            else:
+                quartos[value] = {"Hóspede": input("Digite o nome para a reserva: ")}
+                print("Quarto %i reservado para '%s'" % (value, quartos[value]["Hóspede"]))
+    elif opçao == 'r':
+        print("# RELATÓRIO DOS QUARTOS RESERVADOS #")
+        for i in quartos:
+            print("O quarto Nº %i = %s" % (i, quartos[i]["Hóspede"]))
+    elif opçao == 's':
+        print('Você saiu do programa com sucesso.')
+        break
+    else:
+        print("A opção digitada não existe.")
