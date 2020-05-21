@@ -1,0 +1,22 @@
+continuar = 's'
+filmes = ['']
+print('''
+ESCOLHA UMA OPÇÃO:
+[C] - Cadastrar um novo filme
+[M] - Mostrar os filmes cadastrados
+[R] - Remover um filme cadastrado''')
+while continuar == 's':
+    option = input('Escolha a opção:\n').lower()
+    if option == 'c':
+        filmenovo = input('Digite o nome do filme:\n ')
+        filmes.append(filmenovo)
+    elif option == 'm':
+        print(filmes)
+    elif option == 'r':
+        delete = input('Qual fime deseja deletar?\n ')
+        filmes.remove(delete)
+        print('Lista atualizada:')
+        print(filmes)
+    else:
+        print('Comando não reconhecido.')
+    continuar = input('Deseja continuar? [S] - SIM [N] - NÃO').lower()
