@@ -1,0 +1,77 @@
+import sqlite3
+continuar = 's'
+
+banco = sqlite3.connect('UniSuporte.db')
+cursor = banco.cursor()
+#cursor.execute("CREATE TABLE UniSuporte (cliente TEXT, relato TEXT, status TEXT) ")
+banco.commit()
+
+while continuar.lower() == 's':
+    pgt = input("""Escolha uma opção:
+    [a] - Cadastrar computador
+    [b] - Atualizar o status de um computador
+    [c] - Listar os computadores filtrando pelo status
+    [d] - Remover um computador pelo ID\n""").lower()
+
+    if pgt == 'a':
+        cliente = input('Nome do Cliente: ')
+        relato = input('Relato: ')
+        cursor.execute(f"INSERT INTO UniSuporte "
+                       f"(cliente, relato, status)"
+                       f"VALUES('{cliente}','{relato}','Na fila')")
+        print('Cliente cadastrado com sucesso! ')
+        banco.commit()
+    elif pgt == 'b':
+        clienteID = int(input('Digite o ID do cliente: '))
+        pgt2 = input("""Escolha o novo status: 
+        [a] - Em manutenção
+        [b] - Concluído\n""")
+        if pgt2 == 'a':
+            cursor.execute(f"UPDATE UniSuporte SET status = 'Em manutenção' WHERE id = {clienteID}")
+        elif pgt2 == 'b':
+            cursor.execute(f"UPDATE UniSuporte SET status = 'Concluído' WHERE id = {clienteID}")
+        else:
+            print('Ocorreu um erro, tente novamente.')
+        banco.commit()
+    elif pgt == 'c':
+        filtro = input("""Deseja filtrar qual opção: 
+        [a] - Na fila
+        [b] - Em manutenção
+        [c] - Concluído
+        [d] - Todas as opções\n""").lower()
+        if filtro == 'a':
+            cursor.execute("SELECT * FROM UniSuporte WHERE status = 'Na fila' ")
+            for row in cursor.fetchall():
+                print('ID: ', row[0])
+                print('Cliente: ', row[1])
+                print('Relato: ', row[2])
+                print('Status: ', row[3])
+        elif filtro == 'b':
+            cursor.execute("SELECT * FROM UniSuporte WHERE status = 'Em manutenção' ")
+            for row in cursor.fetchall():
+                print('ID: ', row[0])
+                print('Cliente: ', row[1])
+                print('Relato: ', row[2])
+                print('Status: ', row[3])
+        elif filtro == 'c':
+            cursor.execute("SELECT * FROM UniSuporte WHERE status = 'Concluído' ")
+            for row in cursor.fetchall():
+                print('ID: ', row[0])
+                print('Cliente: ', row[1])
+                print('Relato: ', row[2])
+                print('Status: ', row[3])
+        elif filtro == 'd':
+            cursor.execute("SELECT * FROM UniSuporte")
+            for row in cursor.fetchall():
+                print('ID: ', row[0])
+                print('Cliente: ', row[1])
+                print('Relato: ', row[2])
+                print('Status: ', row[3])
+        else:
+            print('Ocorreu um erro, tente novamente.')
+    elif pgt == 'd':
+        ClientDelete = input('ID do cliente a ser removido: ')
+        cursor.execute(f"DELETE FROM UniSuporte WHERE id = {ClientDelete}")
+        print('Remoção realizada com sucesso.')
+        banco.commit()
+    continuar = input('Fazer outro cadastro/atualização/remoção? [S] para Sim e [N] para Não: ')
