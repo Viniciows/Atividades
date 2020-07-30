@@ -1,0 +1,61 @@
+import sqlite3
+continuar = 's'
+
+banco = sqlite3.connect('MovieStore.db')
+cursor = banco.cursor()
+#cursor.execute("CREATE TABLE MovieStore (filme TEXT, duração INTEGER, assistido TEXT) ")
+banco.commit()
+
+while continuar.lower() == 's':
+    pgt = input("""Escolha uma opção:
+    [a] - Cadastrar um novo filme
+    [b] - Atualizar o status de um filme
+    [c] - Listar os filmes por assistido ou não
+    [d] - Remover um filme pelo ID\n""").lower()
+
+    if pgt == 'a':
+        filme = input('Nome do filme: ')
+        duracao = input('Duração: ')
+        cursor.execute(f"INSERT INTO MovieStore "
+                       f"(filme, duração, assistido)"
+                       f"VALUES('{filme}',{duracao},'Não')")
+        print('Filme cadastrado com sucesso! ')
+        banco.commit()
+    elif pgt == 'b':
+        filmeID = int(input('Digite o ID do filme: '))
+        pgt2 = input("""Escolha o novo status: 
+        [a] - Sim
+        [b] - Não\n""")
+        if pgt2 == 'a':
+            cursor.execute(f"UPDATE MovieStore SET assistido = 'Sim' WHERE id = {filmeID}")
+        elif pgt2 == 'b':
+            cursor.execute(f"UPDATE MovieStore SET assistido = 'Não' WHERE id = {filmeID}")
+        else:
+            print('Ocorreu um erro, tente novamente.')
+        banco.commit()
+    elif pgt == 'c':
+        filtro = input("""Deseja filtrar qual opção: 
+        [a] - Sim
+        [b] - Não\n""").lower()
+        if filtro == 'a':
+            cursor.execute("SELECT * FROM MovieStore WHERE assistido = 'Sim' ")
+            for row in cursor.fetchall():
+                print('ID: ', row[0])
+                print('Filme: ', row[1])
+                print('Duração: ', row[2])
+                print('Assistido: ', row[3])
+        elif filtro == 'b':
+            cursor.execute("SELECT * FROM MovieStore WHERE assistido = 'Não' ")
+            for row in cursor.fetchall():
+                print('ID: ', row[0])
+                print('Filme: ', row[1])
+                print('Duração: ', row[2])
+                print('Assistido: ', row[3])
+        else:
+            print('Ocorreu um erro, tente novamente.')
+    elif pgt == 'd':
+        filmeDelete = input('ID do filme a ser removido: ')
+        cursor.execute(f"DELETE FROM MovieStore WHERE id = {filmeDelete}")
+        print('Remoção realizada com sucesso.')
+        banco.commit()
+    continuar = input('Fazer outro cadastro/atualização/remoção? [S] para Sim e [N] para Não: ')
